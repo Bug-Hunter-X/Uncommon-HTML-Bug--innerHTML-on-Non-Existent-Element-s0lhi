@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This text should be visible.
+  </div>
+  <div id="anotherDiv"></div>
+
+  <script>
+    // Correct way to add content.  Checks if the element exists before modifying it.
+    const myDiv = document.getElementById("myDiv");
+    if (myDiv) {
+      myDiv.innerHTML += "<p>This text is appended correctly.</p>";
+    }
+
+    const anotherDiv = document.getElementById("anotherDiv");
+    if (anotherDiv) {
+        anotherDiv.textContent = "This text is set correctly";
+    } else {
+        console.error("Element with id 'anotherDiv' not found");
+    }
+
+    //Another good practice is to handle the potential error more gracefully.
+    try {
+        document.getElementById("nonExistentElement").innerHTML = "This text won't show.";
+    } catch (error) {
+        console.error("Error accessing element: ", error);
+    }
+  </script>
+</body>
+</html>
